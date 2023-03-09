@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: test_password
+      POSTGRES_DB: test_db
+    volumes:
+      - ./cmd/futures/binance_futures_v1_ddl.sql:/docker-entrypoint-initdb.d/binance_futures_v1_ddl.sql
+    ports:
+      - "5432:5432"
