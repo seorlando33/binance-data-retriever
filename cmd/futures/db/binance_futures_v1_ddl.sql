@@ -1,5 +1,23 @@
 CREATE SCHEMA IF NOT EXISTS futures;
 
+CREATE SEQUENCE futures.kline_kld_id_seq START WITH 1 INCREMENT BY 1;
+
+CREATE SEQUENCE futures.kline_kld_id_seq1 START WITH 1 INCREMENT BY 1;
+
+CREATE SEQUENCE futures.long_short_ratio_lsr_id_seq START WITH 1 INCREMENT BY 1;
+
+CREATE SEQUENCE futures.open_interest_oi_id_seq START WITH 1 INCREMENT BY 1;
+
+CREATE SEQUENCE futures.open_interest_oi_id_seq1 START WITH 1 INCREMENT BY 1;
+
+CREATE SEQUENCE futures.symbol_sym_id_seq START WITH 1 INCREMENT BY 1;
+
+CREATE SEQUENCE futures.taker_buy_sell_volume_bsv_id_seq START WITH 1 INCREMENT BY 1;
+
+CREATE SEQUENCE futures.top_trader_long_short_ratio_account_lsra_id_seq START WITH 1 INCREMENT BY 1;
+
+CREATE SEQUENCE futures.top_trader_long_short_ratio_position_lsrp_id_seq START WITH 1 INCREMENT BY 1;
+
 CREATE  TABLE futures.symbol ( 
 	sym_id               integer DEFAULT nextval('futures.symbol_sym_id_seq'::regclass) NOT NULL  ,
 	sym_symbol           varchar(20)  NOT NULL  ,
@@ -128,4 +146,3 @@ ALTER TABLE futures.taker_buy_sell_volume ADD CONSTRAINT fk_taker_buy_sell_volum
 ALTER TABLE futures.top_trader_long_short_ratio_account ADD CONSTRAINT fk_top_trader_long_short_ratio_account FOREIGN KEY ( sym_id ) REFERENCES futures.symbol( sym_id );
 
 ALTER TABLE futures.top_trader_long_short_ratio_position ADD CONSTRAINT fk_top_trader_long_short_ratio_position FOREIGN KEY ( sym_id ) REFERENCES futures.symbol( sym_id );
-
