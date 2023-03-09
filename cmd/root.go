@@ -12,14 +12,12 @@ import (
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "binance-data-retriever",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Use:   "bdr",
+	Short: "bdr - A CLI tool for retrieving and storing Binance data",
+	Long: `bdr is a command-line tool written in Go for retrieving and storing data from the Binance exchange. 
+	It supports various types of data, such as klines, long/short ratio, open interest, and more.
+	The tool uses a PostgreSQL database to store the data and provides a simple and easy-to-use interface for working with the data.
+	`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
