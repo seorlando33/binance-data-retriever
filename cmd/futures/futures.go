@@ -13,13 +13,11 @@ import (
 // FuturesCmd represents the futures command
 var FuturesCmd = &cobra.Command{
 	Use:   "futures",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "futures - Retrieve and store data for Binance Futures",
+	Long: `The futures command is used to retrieve and store data for Binance Futures.
+	It provides several subcommands for working with different types of data, such as klines, long/short ratio, open interest, and more.
+	The tool uses a PostgreSQL database to store the data and provides a simple and easy-to-use interface for working with the data.
+	`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("futures called")
 	},
