@@ -1,12 +1,12 @@
 /*
 Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-
 */
 package futures
 
 import (
 	"fmt"
 
+	"github.com/seorlando33/binance-data-retriever/cmd/futures/symbols"
 	"github.com/spf13/cobra"
 )
 
@@ -23,6 +23,10 @@ var FuturesCmd = &cobra.Command{
 	},
 }
 
+func AddCommands() {
+	FuturesCmd.AddCommand(symbols.SymbolsCmd)
+}
+
 func init() {
 
 	// Here you will define your flags and configuration settings.
@@ -34,4 +38,6 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// futuresCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+
+	AddCommands()
 }
