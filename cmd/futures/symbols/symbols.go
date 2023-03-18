@@ -8,6 +8,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"github.com/seorlando33/binance-data-retriever/cmd/app"
 )
 
 var symbols []string
@@ -32,9 +33,17 @@ to quickly create a Cobra application.`,
 
 			fmt.Println("Retrieving and storing all the symbols")
 
-		} else {
+			err := app.Service.Futures.Symbol.InsertSymbol()
+			if err != nil {
+				fmt.Println(err.Error())
+			}
 
-			fmt.Println(symbols)
+		} else {
+			fmt.Printf("Retrieving and storing the symbols: %v.", symbols)
+			err := app.Service.Futures.Symbol.InsertSymbol(symbols...)
+			if err != nil {
+				fmt.Println(err.Error())
+			}
 
 		}
 	},
