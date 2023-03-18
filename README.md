@@ -1,0 +1,1 @@
+[![Go Report Card](https://goreportcard.com/report/github.com/seorlando33/binance-data-retriever/)](https://goreportcard.com/report/github.com/seorlando33/binance-data-retriever/)
