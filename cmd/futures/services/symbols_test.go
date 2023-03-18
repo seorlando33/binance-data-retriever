@@ -24,7 +24,7 @@ func TestFilter(t *testing.T) {
 			name:        "no missing",
 			symbolNames: []string{"BTCUSDT", "BNBUSDT"},
 			expectedRes: []futures.Symbol{{Symbol: "BTCUSDT"}, {Symbol: "BNBUSDT"}},
-			expectedMis: []string{},
+			expectedMis: nil,
 		},
 		{
 			name:        "some missing",
@@ -42,7 +42,7 @@ func TestFilter(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
-			res, mis := filter(symbols, tc.symbolNames)
+			res, mis := filter(symbols, tc.symbolNames...)
 
 			if !reflect.DeepEqual(res, tc.expectedRes) {
 				t.Errorf("expected %v but got %v", tc.expectedRes, res)

@@ -6,8 +6,7 @@ import (
 
 	binance "github.com/adshao/go-binance/v2"
 	"github.com/adshao/go-binance/v2/futures"
-	"github.com/seorlando33/binance-data-retriever/cmd/futures/db"
-	"github.com/seorlando33/binance-data-retriever/cmd/futures/db/repository"
+	"github.com/seorlando33/binance-data-retriever/cmd/futures/repository"
 )
 
 type SymbolService interface {
@@ -18,8 +17,8 @@ type symbolService struct {
 	s repository.SymbolRepository
 }
 
-func NewSymbolService() SymbolService {
-	return &symbolService{s: repository.NewPostgresSymbolRepository(db.GetDBConnection())}
+func NewSymbolService(sr repository.SymbolRepository) SymbolService {
+	return &symbolService{s: sr}
 }
 
 func (s *symbolService) InsertSymbol(symbolNames ...string) error {
@@ -29,7 +28,7 @@ func (s *symbolService) InsertSymbol(symbolNames ...string) error {
 		return err
 	}
 
-	symbols, missing := filter(exchangeInfo.Symbols, symbolNames)
+	symbols, missing := filter(exchangeInfo.Symbols, symbolNames...)
 	if missing != nil {
 		return fmt.Errorf("the symbols: %v, doesn't exist", missing)
 	}
@@ -38,10 +37,15 @@ func (s *symbolService) InsertSymbol(symbolNames ...string) error {
 }
 
 
-func filter(symbols []futures.Symbol, symbolNames []string) ([]futures.Symbol, []string) {
+func filter(symbols []futures.Symbol, symbolNames ...string) ([]futures.Symbol, []string) {
+
+	if symbolNames == nil {
+		return symbols, nil
+	}
+
 	symbolsMap := make(map[string]futures.Symbol, len(symbols))
 	result := make([]futures.Symbol, 0, len(symbolNames))
-	missing := make([]string, 0, len(symbolNames))
+	var missing []string
 
 	for _, sym := range symbols {
 		symbolsMap[sym.Symbol] = sym
