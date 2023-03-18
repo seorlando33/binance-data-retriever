@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/seorlando33/binance-data-retriever/cmd/futures"
+	"github.com/seorlando33/binance-data-retriever/cmd/app"
 	"github.com/spf13/cobra"
 )
 
@@ -46,6 +47,8 @@ func init() {
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+
+	app.Run()
 
 	addSubCommands()
 }
