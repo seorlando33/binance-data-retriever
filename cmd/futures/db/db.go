@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	db   *sql.DB
+	db *sql.DB
 )
 
 func init() {

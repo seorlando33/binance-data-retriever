@@ -1,14 +1,13 @@
 /*
 Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-
 */
 package symbols
 
 import (
 	"fmt"
 
-	"github.com/spf13/cobra"
 	"github.com/seorlando33/binance-data-retriever/cmd/app"
+	"github.com/spf13/cobra"
 )
 
 var symbols []string

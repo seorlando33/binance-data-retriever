@@ -36,7 +36,6 @@ func (s *symbolService) InsertSymbol(symbolNames ...string) error {
 	return s.s.InsertSymbol(symbols)
 }
 
-
 func filter(symbols []futures.Symbol, symbolNames ...string) ([]futures.Symbol, []string) {
 
 	if symbolNames == nil {
