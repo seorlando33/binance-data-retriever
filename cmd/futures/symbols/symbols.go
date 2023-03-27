@@ -19,7 +19,7 @@ var all bool
 var SymbolsCmd = &cobra.Command{
 	Use:   "symbols",
 	Short: "Get the symbols",
-	Long: `Retrieve the symbols data from Binance Futures API`,
+	Long:  `Retrieve the symbols data from Binance Futures API`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(symbols) > 0 && all {
 
@@ -66,6 +66,6 @@ func sendToStdout(symbols []futures.Symbol) error {
 
 	// send symbols to stdout
 	_, err := os.Stdout.Write(body)
-	
+
 	return err
 }
