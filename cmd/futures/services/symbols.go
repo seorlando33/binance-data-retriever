@@ -12,7 +12,7 @@ type SymbolService interface {
 	GetSymbols(...string) ([]futures.Symbol, error)
 }
 
-type symbolService struct {}
+type symbolService struct{}
 
 func NewSymbolService() SymbolService {
 	return &symbolService{}
