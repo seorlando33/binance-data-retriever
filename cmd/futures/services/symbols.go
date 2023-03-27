@@ -6,34 +6,31 @@ import (
 
 	binance "github.com/adshao/go-binance/v2"
 	"github.com/adshao/go-binance/v2/futures"
-	"github.com/seorlando33/binance-data-retriever/cmd/futures/repository"
 )
 
 type SymbolService interface {
-	InsertSymbol(...string) error
+	GetSymbols(...string) ([]futures.Symbol, error)
 }
 
-type symbolService struct {
-	s repository.SymbolRepository
+type symbolService struct {}
+
+func NewSymbolService() SymbolService {
+	return &symbolService{}
 }
 
-func NewSymbolService(sr repository.SymbolRepository) SymbolService {
-	return &symbolService{s: sr}
-}
-
-func (s *symbolService) InsertSymbol(symbolNames ...string) error {
+func (s *symbolService) GetSymbols(symbolNames ...string) ([]futures.Symbol, error) {
 
 	exchangeInfo, err := binance.NewFuturesClient("", "").NewExchangeInfoService().Do(context.Background())
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	symbols, missing := filter(exchangeInfo.Symbols, symbolNames...)
 	if missing != nil {
-		return fmt.Errorf("the symbols: %v, doesn't exist", missing)
+		return nil, fmt.Errorf("the symbols: %v, doesn't exist", missing)
 	}
 
-	return s.s.InsertSymbol(symbols)
+	return symbols, nil
 }
 
 func filter(symbols []futures.Symbol, symbolNames ...string) ([]futures.Symbol, []string) {
